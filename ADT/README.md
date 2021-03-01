@@ -190,6 +190,52 @@ a VM should also include plain english descriptions of its hardware capabilities
 
 ##### Table 6. Metadata to be provided by DMA Composer to generate an IDT
 
+    Below are the cloud specific tables a DMA Composer will reference to create an IDT
+
+#### OpenStack Nova
+
+The table below shows the metadata available for defining an **OpenStack Nova** Compute Node. The **required** keys
+are shown in Table 7 in **bold**. 
+
+**NOTE** that the required value for the `type` key is given in its description.
+
+| key                            | value (type)                 | description                                                          |
+| ------------------------------ |:----------------------------:| -------------------------------------------------------------------- |
+| **name**                       | **string**                   | **Name of virtual machine**                                          |
+| **type**                       | **string**                   | ***tosca.nodes.MiCADO.Nova.Compute***                                |
+| **image_id**                   | **string**                   | **ID of VM drive image (Ubuntu 18.04 & 20.04 supported)**            |
+| **project_id**                 | **string**                   | **ID of the project to scope to**                                    |
+| **network_id**                 | **string**                   | **ID of the network to connect to**                                  |
+| flavor_id                      | string                       | ID of the instance flavor **(required if `flavor_name` not given)**  |
+| flavor_name                    | string                       | Name of the instance flavor **(required if `flavor_id` not given)**  |
+| key_name                       | string                       | Name of the SSH keypair                                              |
+| security_groups                | []string                     | List of security group IDs to apply                                  |
+| auth_url                       | string                       | Endpoint of the v3 Identity service                                  |
+
+##### Table 7. Required (in bold) and optional metadata for describing OpenStack Nova virtual machines in MiCADO
+
+
+#### AWS EC2
+
+The table below shows the metadata available for defining an **EC2** instance in AWS. The **required** keys
+are shown in Table 8 in **bold**. 
+
+**NOTE** that the required value for the `type` key is given in its description.
+
+| key                            | value (type)                 | description                                                          |
+| ------------------------------ |:----------------------------:| -------------------------------------------------------------------- |
+| **name**                       | **string**                   | **Name of virtual machine**                                          |
+| **type**                       | **string**                   | ***tosca.nodes.MiCADO.EC2.Compute***                                 |
+| **region_name**                | **string**                   | **Name of the AWS region to scope to (eg. us-east-1)**               |
+| **image_id**                   | **string**                   | **ID of VM drive image (Ubuntu 18.04 & 20.04 supported)**            |
+| **instance_type**              | **string**                   | **Name of the instance type to use (eg. t2.small)**                  |
+| key_name                       | string                       | Name of the SSH keypair                                              |
+| security_group_ids             | []string                     | List of security group IDs to apply                                  |
+| subnet_id                      | string                       | ID of the subnet to join                                             |
+| tags                           | map[string]string            | Mapping of additional metadata tags                                  |
+
+##### Table 8. Required (in bold) and optional metadata for describing AWS EC2 virtual machines in MiCADO
+
 The requirements defined by the microservice publisher (see 1.2) can now be matched to the
 plain english descriptions provided by the DMA Composer, and we can select the most appropriate
 concrete VM (which will include specific CSP keys and values) at deployment time.
@@ -457,51 +503,3 @@ topology_template:
 
 At Deployment time, MiCADO completes the ADT (generated in 4.2) by selecting the best match
 VMs from the IDT (generated in 4.3).
-
-### Appendix 
-
-**Below are the cloud specific tables a DMA Composer will reference to create an IDT**
-
-#### OpenStack Nova
-
-The table below shows the metadata available for defining an **OpenStack Nova** Compute Node. The **required** keys
-are shown in Table 7 in **bold**. 
-
-**NOTE** that the required value for the `type` key is given in its description.
-
-| key                            | value (type)                 | description                                                          |
-| ------------------------------ |:----------------------------:| -------------------------------------------------------------------- |
-| **name**                       | **string**                   | **Name of virtual machine**                                          |
-| **type**                       | **string**                   | ***tosca.nodes.MiCADO.Nova.Compute***                                |
-| **image_id**                   | **string**                   | **ID of VM drive image (Ubuntu 18.04 & 20.04 supported)**            |
-| **project_id**                 | **string**                   | **ID of the project to scope to**                                    |
-| **network_id**                 | **string**                   | **ID of the network to connect to**                                  |
-| flavor_id                      | string                       | ID of the instance flavor **(required if `flavor_name` not given)**  |
-| flavor_name                    | string                       | Name of the instance flavor **(required if `flavor_id` not given)**  |
-| key_name                       | string                       | Name of the SSH keypair                                              |
-| security_groups                | []string                     | List of security group IDs to apply                                  |
-| auth_url                       | string                       | Endpoint of the v3 Identity service                                  |
-
-##### Table 7. Required (in bold) and optional metadata for describing OpenStack Nova virtual machines in MiCADO
-
-
-#### AWS EC2
-
-The table below shows the metadata available for defining an **EC2** instance in AWS. The **required** keys
-are shown in Table 8 in **bold**. 
-
-**NOTE** that the required value for the `type` key is given in its description.
-
-| key                            | value (type)                 | description                                                          |
-| ------------------------------ |:----------------------------:| -------------------------------------------------------------------- |
-| **name**                       | **string**                   | **Name of virtual machine**                                          |
-| **type**                       | **string**                   | ***tosca.nodes.MiCADO.EC2.Compute***                                 |
-| **region_name**                | **string**                   | **Name of the AWS region to scope to (eg. us-east-1)**               |
-| **image_id**                   | **string**                   | **ID of VM drive image (Ubuntu 18.04 & 20.04 supported)**            |
-| **instance_type**              | **string**                   | **Name of the instance type to use (eg. t2.small)**                  |
-| key_name                       | string                       | Name of the SSH keypair                                              |
-| security_group_ids             | []string                     | List of security group IDs to apply                                  |
-| subnet_id                      | string                       | ID of the subnet to join                                             |
-| tags                           | map[string]string            | Mapping of additional metadata tags                                  |
-
-##### Table 8. Required (in bold) and optional metadata for describing AWS EC2 virtual machines in MiCADO
