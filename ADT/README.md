@@ -458,7 +458,9 @@ topology_template:
 At Deployment time, MiCADO completes the ADT (generated in 4.2) by selecting the best match
 VMs from the IDT (generated in 4.3).
 
-**Below are the tables a cloud operator will reference to create their "available VMs document"**
+### Appendix 
+
+**Below are the cloud specific tables a DMA Composer will reference to create an IDT**
 
 #### OpenStack Nova
 
