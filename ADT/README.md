@@ -324,7 +324,7 @@ topology_template:
 ```json
 {
     "microservices": ["algorithm-main-container", "algorithm-db-container"],
-    "topology": {
+    "topology_mapping": {
         "algorithm-main-container": "algorithm-main-container-host",
         "algorithm-db-container": "algorithm-main-container-host"
     }
