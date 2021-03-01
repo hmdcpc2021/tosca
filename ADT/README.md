@@ -126,8 +126,8 @@ Description Template) - the descriptor file used to deploy applications in MiCAD
 
 By providing this list of Microservices, a default **topology** will be created automatically.
 
-  The term topology here is used to describe the mapping of microservices
-  (containers) to infrastructure (virtual machines)
+    The term topology here is used to describe the mapping of microservices
+    (containers) to infrastructure (virtual machines)
 
 The **default topology** maps each microservice to a virtual machine described by the
 Hardware/Infrastructure requirements (see 1.2) for that microservice. This topology
@@ -151,9 +151,9 @@ In addition to the list of microservices (2.1) and topology (2.2), higher-level
 metadata will be provided. This metadata can be used to display descriptions to users, and support filtering
 or searching for Algorithms that have been published to the platform.
 
-  From a Nexus perspective, the ADT (generated from data in 2.1 and 2.2) will be uploaded
-  to Nexus as a Nexus Asset. The higher-level metadata (in 2.3) will be the Nexus Metadata
-  attached to the Nexus Asset.
+    From a Nexus perspective, the ADT (generated from data in 2.1 and 2.2) will be uploaded
+    to Nexus as a Nexus Asset. The higher-level metadata (in 2.3) will be the Nexus Metadata
+    attached to the Nexus Asset.
 
 
 ## 3. Deploying an Algorithm
@@ -171,7 +171,7 @@ can be created on their desired cloud(s). The described virtual machines will be
 and will therefore need all the account specific IDs (see Table 6 and 7 for examples). Each description of
 a VM should also include plain english descriptions of its hardware capabilities.
 
-  The metadata provided by the DMA Composer will generate an Infrastructure Description Template (IDT).
+    The metadata provided by the DMA Composer will generate an Infrastructure Description Template (IDT).
 
 
 | description                                                    | key                            | value (type)             |
