@@ -24,8 +24,7 @@ can be extracted from any one of the following common forms of container deploym
 
 .
 
-    This will result in the generation of a TOSCA **Microservice**
-    **Description Template**.
+    This will result in the generation of a TOSCA Microservice Description Template (MDT).
     
 The following fields will be automatically filled, or left in a default state:
 
