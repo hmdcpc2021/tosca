@@ -83,6 +83,8 @@ The microservice publisher can also specify a specific runtime for their contain
 
 ### 1.2 Microservices Hardware/Infrastructure Requirements
 
+    TODO: Align this with WP6 Metadata
+
 The Microservices publisher should also provide metadata to specify what the hardware, infrastructure or other hosting requirements are for each Microservice, in a cloud-agnostic way. The following metadata can be provided for each virtual machine:
 
 | description                                                    | key                            | value (type)             |
@@ -91,6 +93,7 @@ The Microservices publisher should also provide metadata to specify what the har
 | The maximum number of CPUs (or vCPUS)                          | max_cpu                        | int                      |
 | The minimum desired RAM size                                   | min_mem                        | scalar (MB/GB)           |
 | The maximum desired RAM size                                   | max_mem                        | scalar (MB/GB)           |
+| Number of GPUs required                                        | num_gpu                        | int                      |
 | Operating system architecture                                  | os_arch                        | string                   |
 | Operating system type (linux/windows)                          | os_type                        | string                   |
 | Operating system distribution (ubuntu/fedora)                  | os_distro                      | string                   |
