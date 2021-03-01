@@ -22,9 +22,12 @@ can be extracted from any one of the following common forms of container deploym
 - Helm Chart
 - MiCADO Application Description Template
 
-Extracting configuration details from these formats results in the generation of a **Microservice**
-**Description Template** in TOSCA. The following fields will be automatically filled, or left in a
-default state.
+.
+
+    This will result in the generation of a TOSCA **Microservice**
+    **Description Template**.
+    
+The following fields will be automatically filled, or left in a default state:
 
 | description                                                    | key                            | value (type)                 |
 | ---------------------------------------------------------------| ------------------------------ |:----------------------------:|
@@ -103,9 +106,9 @@ In addition to the configuration details (1.1) and hardware/infrastructure requi
 metadata will be provided. This metadata can be used to display descriptions to users, and support filtering
 or searching for Microservices that have been published to the platform.
 
-  From a Nexus perspective, the MDT (generated from data in 1.1 and 1.2) will be uploaded
-  to Nexus as a Nexus Asset. The higher-level metadata (in 1.3) will be the Nexus Metadata
-  attached to the Nexus Asset.
+    From a Nexus perspective, the MDT (generated from data in 1.1 and 1.2) will be uploaded
+    to Nexus as a Nexus Asset. The higher-level metadata (in 1.3) will be the Nexus Metadata
+    attached to the Nexus Asset.
 
 ## 2. Publishing an Algorithm
 
@@ -113,8 +116,10 @@ or searching for Microservices that have been published to the platform.
 
 Now that the required Microservices have been published, the Algorithm Provider can
 publish the algorithm. To do so, they provide a list of the Microservices that make
-up this algorithm. The list of Microservices is used to generate an ADT (Application
-Description Template) - the descriptor file used to deploy applications in MiCADO.
+up this algorithm.
+
+    The list of Microservices is used to generate a TOSCA ADT (Application
+    Description Template) - the descriptor file used to deploy applications in MiCADO.
 
 | description                                                    | key                            | value (type)             |
 | ---------------------------------------------------------------| ------------------------------ |:------------------------:|
@@ -171,7 +176,7 @@ can be created on their desired cloud(s). The described virtual machines will be
 and will therefore need all the account specific IDs (see Table 6 and 7 for examples). Each description of
 a VM should also include plain english descriptions of its hardware capabilities.
 
-    The metadata provided by the DMA Composer will generate an Infrastructure Description Template (IDT).
+    The metadata provided by the DMA Composer will generate a TOSCA Infrastructure Description Template (IDT).
 
 
 | description                                                    | key                            | value (type)             |
