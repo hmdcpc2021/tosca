@@ -175,8 +175,8 @@ provider must be matched with virtual machines that will be provisioned on the d
 
 The DMA Composer will provide metadata that will describe the possible infrastructure (virtual machines) that
 can be created on their desired cloud(s). The described virtual machines will be ready-to-provision
-and will therefore need all the account specific IDs (see Table 6 and 7 for examples). Each description of
-a VM should also include plain english descriptions of its hardware capabilities.
+and will therefore need all the account specific IDs (see Table 7 and 8 for examples). Each description of
+a VM should also include plain english descriptions of its hardware capabilities (see Table 6).
 
     The metadata provided by the DMA Composer will generate a TOSCA Infrastructure Description Template (IDT).
 
