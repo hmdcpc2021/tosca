@@ -322,7 +322,7 @@ topology_template:
               version: { greater_or_equal: "20.04" }
 ```
 
-#### Also consider this alternative
+#### *Also consider this alternative*
 
 **The same list of Microservices is given, but the topology is overwritten**
 ```json
