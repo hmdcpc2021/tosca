@@ -175,7 +175,7 @@ provider must be matched with virtual machines that will be provisioned on the d
 
 The DMA Composer will provide metadata that will describe the possible infrastructure (virtual machines) that
 can be created on their desired cloud(s). The described virtual machines will be ready-to-provision
-and will therefore need all the account specific IDs (see Table 7 and 8 for examples). Each description of
+and will therefore need all the account specific IDs (see Table 7 for examples). Each description of
 a VM should also include plain english descriptions of its hardware capabilities (see Table 6).
 
     The metadata provided by the DMA Composer will generate a TOSCA Infrastructure Description Template (IDT).
@@ -183,7 +183,7 @@ a VM should also include plain english descriptions of its hardware capabilities
 
 | description                                                    | key                            | value (type)             |
 | ---------------------------------------------------------------| ------------------------------ |:------------------------:|
-| **Specific Cloud Service Provider keys/values (Table 7 & 8)**  | **See Tables 7 & 8**           | **See Tables 7 & 8**     |             
+| **Specific Cloud Service Provider keys/values (Table 7)**      | **See Table 7**                | **See Table 7**          |             
 | The number of CPUs (or vCPUS)                                  | num_cpus                       | int                      |
 | The RAM size                                                   | mem_size                       | scalar (MB/GB)           |
 | Operating system architecture                                  | os_arch                        | string                   |
@@ -195,9 +195,9 @@ a VM should also include plain english descriptions of its hardware capabilities
 
     Below are the cloud specific tables a DMA Composer will reference to create an IDT
 
-#### OpenStack Nova
+#### CloudBroker
 
-The table below shows the metadata available for defining an **OpenStack Nova** Compute Node. The **required** keys
+The table below shows the metadata available for defining virtual machine instances in **CloudBroker**. The **required** keys
 are shown in Table 7 in **bold**. 
 
 **NOTE** that the required value for the `type` key is given in its description.
@@ -205,39 +205,15 @@ are shown in Table 7 in **bold**.
 | key                            | value (type)                 | description                                                          |
 | ------------------------------ |:----------------------------:| -------------------------------------------------------------------- |
 | **name**                       | **string**                   | **Name of virtual machine**                                          |
-| **type**                       | **string**                   | ***tosca.nodes.MiCADO.Nova.Compute***                                |
-| **image_id**                   | **string**                   | **ID of VM drive image (Ubuntu 18.04 & 20.04 supported)**            |
-| **project_id**                 | **string**                   | **ID of the project to scope to**                                    |
-| **network_id**                 | **string**                   | **ID of the network to connect to**                                  |
-| flavor_id                      | string                       | ID of the instance flavor **(required if `flavor_name` not given)**  |
-| flavor_name                    | string                       | Name of the instance flavor **(required if `flavor_id` not given)**  |
-| key_name                       | string                       | Name of the SSH keypair                                              |
-| security_groups                | []string                     | List of security group IDs to apply                                  |
-| auth_url                       | string                       | Endpoint of the v3 Identity service                                  |
+| **type**                       | **string**                   | ***tosca.nodes.MiCADO.CloudBroker.Compute***                         |
+| **endpoint**                   | **string**                   | **Endpoint of the CloudBroker platform to use**                      |
+| **deployment_id**              | **string**                   | **ID of CloudBroker Deployment (Ubuntu 18.04 & 20.04 supported)**    |
+| **instance_type_id**           | **string**                   | **ID of the instance type (flavour) to use**                         |
+| **key_pair_id**                | **string**                   | **ID of the SSH keypair to attach to the instance**                  |
+| opened_port                    | []int                        | Port numbers to open at the Cloud Provider level                     |
 
-##### Table 7. Required (in bold) and optional metadata for describing OpenStack Nova virtual machines in MiCADO
+##### Table 7. Required (in bold) and optional metadata for describing CloudBroker virtual machines in MiCADO
 
-
-#### AWS EC2
-
-The table below shows the metadata available for defining an **EC2** instance in AWS. The **required** keys
-are shown in Table 8 in **bold**. 
-
-**NOTE** that the required value for the `type` key is given in its description.
-
-| key                            | value (type)                 | description                                                          |
-| ------------------------------ |:----------------------------:| -------------------------------------------------------------------- |
-| **name**                       | **string**                   | **Name of virtual machine**                                          |
-| **type**                       | **string**                   | ***tosca.nodes.MiCADO.EC2.Compute***                                 |
-| **region_name**                | **string**                   | **Name of the AWS region to scope to (eg. us-east-1)**               |
-| **image_id**                   | **string**                   | **ID of VM drive image (Ubuntu 18.04 & 20.04 supported)**            |
-| **instance_type**              | **string**                   | **Name of the instance type to use (eg. t2.small)**                  |
-| key_name                       | string                       | Name of the SSH keypair                                              |
-| security_group_ids             | []string                     | List of security group IDs to apply                                  |
-| subnet_id                      | string                       | ID of the subnet to join                                             |
-| tags                           | map[string]string            | Mapping of additional metadata tags                                  |
-
-##### Table 8. Required (in bold) and optional metadata for describing AWS EC2 virtual machines in MiCADO
 
 The requirements defined by the microservice publisher (see 1.2) can now be matched to the
 plain english descriptions provided by the DMA Composer, and we can select the most appropriate
@@ -432,22 +408,24 @@ topology_template:
 **Metadata is provided by the DMA Composer that describes available VMs for deployment**
 ```json
 {
-    "nova_small_ubuntu_20": {
-        "image_id": "IMAGE_ID_FOR_UBUNTU_20_04",
-        "flavor_id": "FLAVOR_ID_FOR_SMALL_INSTANCE",
-        "project_id": "PROJECT_ID_FOR_OPENSTACK",
-        "ssh_key": "REGISTERED_SSH_KEYNAME",
+    "cb_small_ubuntu_20": {
+        "deployment_id": "e7491688-599d-4344-95ef-aff79a60890e",
+        "instance_type_id": "9b2028be-9287-4bf6-bbfe-bcbc92f065c0",
+        "key_pair_id": "d865f75f-d32b-4444-9fbb-3332bcedeb75",
+        "opened_port": "22,80,443",
+        "endpoint": "https://dbs.cloudbroker.com"
         "num_cpu": "2",
         "mem_size": "2 GB",
         "os_arch": "x86_64",
         "os_distro": "ubuntu",
         "os_version": "20.04"
     },
-    "nova_large_ubuntu_20": {
-        "image_id": "IMAGE_ID_FOR_UBUNTU_20_04",
-        "flavor_id": "FLAVOR_ID_FOR_LARGE_INSTANCE",
-        "project_id": "PROJECT_ID_FOR_OPENSTACK",
-        "ssh_key": "REGISTERED_SSH_KEYNAME",
+    "cb_large_ubuntu_20": {
+        "deployment_id": "3332bcedeb75-599d-9287-95ef-e7491688",
+        "instance_type_id": "bcbc92f065c0-4444-4bf6-bbfe-9b2028be",
+        "key_pair_id": "aff79a60890e-d32b-4344-9fbb-d865f75f",
+        "opened_port": "22,80,443",
+        "endpoint": "https://dbs.cloudbroker.com"
         "num_cpu": "4",
         "mem_size": "16 GB",
         "os_arch": "x86_64",
@@ -466,12 +444,13 @@ imports: github.com/micado-scale/tosca/micado_types.yaml
 topology_template:
   node_templates:
     nova_small_ubuntu_20:
-      type: MiCADO.Compute.Nova
+      type: MiCADO.Compute.CloudBroker
       properties:
-        image_id: IMAGE_ID_FOR_UBUNTU_20_04
-        flavor_id: FLAVOR_ID_FOR_SMALL_INSTANCE
-        project_id: PROJECT_ID_FOR_OPENSTACK
-        ssh_key: REGISTERED_SSH_KEYNAME
+        deployment_id: e7491688-599d-4344-95ef-aff79a60890e
+        instance_type_id: 9b2028be-9287-4bf6-bbfe-bcbc92f065c0
+        key_pair_id: d865f75f-d32b-4444-9fbb-3332bcedeb75
+        opened_port: '22,80,443'
+        endpoint: https://dbs.cloudbroker.com
       capabilities:
       - host:
           properties:
@@ -485,12 +464,13 @@ topology_template:
             version: "20.04"
 
     nova_large_ubuntu_20:
-      type: MiCADO.Compute.Nova
+      type: MiCADO.Compute.CloudBroker
       properties:
-        image_id: IMAGE_ID_FOR_UBUNTU_20_04
-        flavor_id: FLAVOR_ID_FOR_LARGE_INSTANCE
-        project_id: PROJECT_ID_FOR_OPENSTACK
-        ssh_key: REGISTERED_SSH_KEYNAME
+        deployment_id: 3332bcedeb75-599d-9287-95ef-e7491688
+        instance_type_id: bcbc92f065c0-4444-4bf6-bbfe-9b2028be
+        key_pair_id: aff79a60890e-d32b-4344-9fbb-d865f75f
+        opened_port: '22,80,443'
+        endpoint: https://dbs.cloudbroker.com
       capabilities:
       - host:
           properties:
