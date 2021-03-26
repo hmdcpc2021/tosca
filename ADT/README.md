@@ -210,7 +210,7 @@ are shown in Table 7 in **bold**.
 | **deployment_id**              | **string**                   | **ID of CloudBroker Deployment (Ubuntu 18.04 & 20.04 supported)**    |
 | **instance_type_id**           | **string**                   | **ID of the instance type (flavour) to use**                         |
 | **key_pair_id**                | **string**                   | **ID of the SSH keypair to attach to the instance**                  |
-| opened_port                    | []int                        | Port numbers to open at the Cloud Provider level                     |
+| opened_port                    | string (comma separated ints)| Port numbers to open at the Cloud Provider level                     |
 
 ##### Table 7. Required (in bold) and optional metadata for describing CloudBroker virtual machines in MiCADO
 
