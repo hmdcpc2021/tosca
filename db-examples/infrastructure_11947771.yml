@@ -19,7 +19,7 @@ topology_template:
     node_type: dbs.infrastructure_11947771
         
   node_templates:
-    cloud-1:
+    FrauhofnerCloud1:
       type: tosca.nodes.MiCADO.Compute.CloudBroker
       properties:
         deployment_id: e7491688-599d-4344-95ef-aff79a60890e
