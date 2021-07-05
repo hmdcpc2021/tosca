@@ -1,0 +1,27 @@
+tosca_definitions_version: tosca_simple_yaml_1_2
+
+metadata:
+  id: algorithm_10824912410291
+  name: RISTRA@EDGE
+  author: Fraunhofer IGD
+  date: 2021-07-05
+  version: 1
+  description: Solver for Structural Analysis - linear elasticity
+  classificationSchema: Simulation 
+  shortDescription: [ Solver for Structural Analysis, Linear Elasticity ]
+
+imports:
+- https://raw.githubusercontent.com/micado-scale/tosca/master/micado_types.yaml
+- microservice_12312124.yml
+
+topology_template:        
+  node_templates:
+    microservice_12312124:
+      type: dbs.microservice_12312124
+      directive: [ substitute ]
+      requirements:
+      - host: host_microservice_12312124
+
+    host_microservice_12312124:
+      type: dbs.infrastructure
+      directive: [ substitute ]

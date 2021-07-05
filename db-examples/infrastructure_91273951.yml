@@ -1,0 +1,25 @@
+tosca_definitions_version: tosca_simple_yaml_1_2
+
+metadata:
+  id: infrastructure_91273951
+  created_at: 2021-07-05
+  name: FrauhofnerEdgeFloor1
+  author: Fraunhofer IGD
+  type: edge
+
+imports:
+  - https://raw.githubusercontent.com/micado-scale/tosca/master/micado_types.yaml
+
+node_types:
+  dbs.infrastructure_91273951:
+    derived_from: dbs.infrastructure
+
+topology_template:
+  substitution_mappings:
+    node_type: dbs.infrastructure_91273951
+        
+  node_templates:
+    edge-floor-1:
+      type: tosca.nodes.MiCADO.Edge
+      properties:
+        public_ip: 192.168.1.1

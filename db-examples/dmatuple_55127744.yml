@@ -1,0 +1,32 @@
+tosca_definitions_version: tosca_simple_yaml_1_2
+
+metadata:
+  id: dmatuple_55127744
+  created_at: 2021-07-05
+  name: Structural Simulation for Engine Mount of Fraunhofer's IP Instance with serial number 1234
+  scope: |
+    The DMA Tuple is simulating the structural behaviour of the engine
+    mount occuring from forces indicated by the attached engine for
+    Fraunhofer's moving machine with serial number 1234
+  author: <ID of Fraunhofer.IGD.Maxim.Redkin>
+  licensor: <ID of Fraunhofer.IGD>
+  ip_instance: <ID of Fraunhofer's moving machine with serial number 1234>
+  ma_pair: <ID of MA Pair described on MA Pair tab>
+  schedule: workdays
+
+imports:
+  - https://raw.githubusercontent.com/micado-scale/tosca/master/micado_types.yaml
+  - microservice_12312124.yml
+  - infrastructure_91273951.yml
+
+topology_template:        
+  node_templates:
+    microservice_12312124:
+      type: dbs.microservice_12312124
+      directive: [ substitute ]
+      requirements:
+      - host: host_microservice_12312124
+
+    host_microservice_12312124:
+      type: dbs.infrastructure_91273951
+      directive: [ substitute ]

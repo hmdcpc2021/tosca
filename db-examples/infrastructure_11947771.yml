@@ -1,0 +1,29 @@
+tosca_definitions_version: tosca_simple_yaml_1_2
+
+metadata:
+  id: infrastructure_11947771
+  created_at: 2021-07-05
+  name: FrauhofnerCloud1
+  author: Fraunhofer IGD
+  type: cloudbroker
+
+imports:
+  - https://raw.githubusercontent.com/micado-scale/tosca/master/micado_types.yaml
+
+node_types:
+  dbs.infrastructure_11947771:
+    derived_from: dbs.infrastructure
+
+topology_template:
+  substitution_mappings:
+    node_type: dbs.infrastructure_11947771
+        
+  node_templates:
+    cloud-1:
+      type: tosca.nodes.MiCADO.Compute.CloudBroker
+      properties:
+        deployment_id: e7491688-599d-4344-95ef-aff79a60890e
+        instance_type_id: 9b2028be-9287-4bf6-bbfe-bcbc92f065c0
+        key_pair_id: d865f75f-d32b-4444-9fbb-3332bcedeb75
+        opened_port: '22,80,443'
+        endpoint: https://dbs.cloudbroker.com
